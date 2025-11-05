@@ -20,10 +20,10 @@ int main() {
   }
 
   //Create the local address object
-  struct sockaddr_in sock_in = {
-    .sin_family = AF_INET,
-    .sin_port = htons(1337),
-    .sin_addr.s_addr = htonl(INADDR_ANY)
+  sockaddr_in sock_in = {
+    { AF_INET },
+    {htons(1337)},
+    {htonl(INADDR_ANY)}
   };
 
   // Bind the socket to an address from OS

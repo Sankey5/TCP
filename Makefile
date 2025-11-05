@@ -1,2 +1,2 @@
 build:
-	g++ main.cpp -o tcp.exe
+	g++ main.cpp -o http.exe
