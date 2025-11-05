@@ -9,7 +9,7 @@
 int main() {
   int socketFd;
   const unsigned int BUFFER_SIZE = 2048;
-  char buffer[BUFFER_SIZE]{};
+  char buffer[BUFFER_SIZE] {};
 
   // Create a network TCP socket;
   socketFd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -21,9 +21,9 @@ int main() {
 
   //Create the local address object
   sockaddr_in sock_in = {
-    { AF_INET },
-    {htons(1337)},
-    {htonl(INADDR_ANY)}
+    .sin_family { AF_INET },
+    .sin_port { htons(1337) },
+    .sin_addr.s_addr { htonl(INADDR_ANY) }
   };
 
   // Bind the socket to an address from OS
@@ -33,15 +33,16 @@ int main() {
     return EXIT_FAILURE;
   }
 
-  //Listen
+  // Listen
   if (listen(socketFd, 1) == -1) {
     fprintf(stderr, "Unable to listen on a socket!");
     close(socketFd);
     return EXIT_FAILURE;
   }
 
+  // 
   while (true) {
-    int connfd = accept(socketFd, NULL, NULL);
+    int connfd = accept(socketFd, nullptr, nullptr);
 
     if (connfd == -1) {
       fprintf(stderr, "Unable to accept connections");
